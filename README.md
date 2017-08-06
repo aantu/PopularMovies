@@ -7,7 +7,6 @@ App to allow users to discover the most popular movies playing.
 ### Stage 1
 
 + Grid arrangement of movie posters
-+ Discover the most popular, the highest rated and the most rated movies
 + Sort movies order via a setting:
   + By most popular 
   + By highest-rated
