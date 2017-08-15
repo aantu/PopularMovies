@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Arthur Antunes.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_light">
+
+  <ImageView
+      android:id="@+id/movie_detail_poster"
+      android:layout_width="@dimen/image_view_movie_detail_poster_width"
+      android:layout_height="@dimen/image_view_movie_detail_poster_height"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:adjustViewBounds="true"
+      android:background="@color/primary"
+      android:contentDescription="@string/movie_details_poster_content_description"
+      android:scaleType="fitXY"/>
+
+  <TextView
+      android:id="@+id/movie_detail_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/movie_detail_poster"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="8dp"
+      android:layout_toEndOf="@id/movie_detail_poster"
+      android:ellipsize="end"
+      android:maxLines="3"
+      android:textAppearance="@style/TextAppearance.AppCompat.Title"
+      android:textColor="@color/primary_text"
+      tools:text="Title"
+      />
+
+  <TextView
+      android:id="@+id/movie_detail_release_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignStart="@id/movie_detail_title"
+      android:layout_below="@id/movie_detail_title"
+      android:layout_marginTop="8dp"
+      android:drawablePadding="8dp"
+      android:drawableStart="@drawable/ic_calendar_20dp"
+      android:gravity="center"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+      android:textColor="@color/primary_text"
+      tools:text="2015"
+      />
+
+  <TextView
+      android:id="@+id/movie_detail_rating"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignStart="@id/movie_detail_release_date"
+      android:layout_below="@id/movie_detail_release_date"
+      android:layout_marginTop="8dp"
+      android:drawablePadding="8dp"
+      android:drawableStart="@drawable/ic_star_20dp"
+      android:gravity="center"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+      android:textColor="@color/primary_text"
+      tools:text="7.5"
+      />
+
+  <TextView
+      android:id="@+id/movie_detail_overview"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/movie_detail_poster"
+      android:layout_margin="@dimen/text_margin"
+      android:lineSpacingExtra="4sp"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+      android:textColor="@color/primary_text"
+      tools:text="text text text"
+      />
+</RelativeLayout>

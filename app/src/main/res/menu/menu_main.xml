@@ -17,7 +17,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.arthurantunes.popularmovies.MainActivity">
+    tools:context="com.arthurantunes.popularmovies.main.GalleryActivity">
 
   <item
       android:id="@+id/action_filter"
@@ -26,10 +26,16 @@
       android:title="@string/action_filter"
       app:showAsAction="always">
     <menu>
-      <item android:id="@+id/action_sort_by_most_popular"
-          android:title="@string/action_sort_by_most_popular" />
-      <item android:id="@+id/action_sort_by_top_rated"
-          android:title="@string/action_sort_by_top_rated" />
+      <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_sort_by_most_popular"
+            android:checked="true"
+            android:title="@string/action_sort_by_most_popular" />
+        <item
+            android:id="@+id/action_sort_by_top_rated"
+            android:title="@string/action_sort_by_top_rated" />
+      </group>
     </menu>
   </item>
+
 </menu>

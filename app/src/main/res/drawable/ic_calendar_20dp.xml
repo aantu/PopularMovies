@@ -14,20 +14,12 @@
   ~ limitations under the License.
   -->
 
-<resources>
-  <dimen name="text_margin">16dp</dimen>
-
-  <dimen name="cardview_gallery_movie_poster_height">270dp</dimen>
-
-  <dimen name="progress_bar_circular_width">42dp</dimen>
-  <dimen name="progress_bar_circular_height">42dp</dimen>
-
-  <dimen name="button_retry_width">150dp</dimen>
-  <dimen name="button_retry_height">50dp</dimen>
-
-  <dimen name="image_view_empty_state_width">100dp</dimen>
-  <dimen name="image_view_empty_state_height">100dp</dimen>
-
-  <dimen name="image_view_movie_detail_poster_width">100dp</dimen>
-  <dimen name="image_view_movie_detail_poster_height">150dp</dimen>
-</resources>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="20dp"
+        android:height="20dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M19,3h-1L18,1h-2v2L8,3L8,1L6,1v2L5,3c-1.11,0 -1.99,0.9 -1.99,2L3,19c0,1.1 0.89,2 2,2h14c1.1,0 2,-0.9 2,-2L21,5c0,-1.1 -0.9,-2 -2,-2zM19,19L5,19L5,8h14v11zM7,10h5v5L7,15z"/>
+</vector>

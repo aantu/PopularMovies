@@ -17,9 +17,20 @@
 <resources>
   <string name="app_name">Popular Movies</string>
 
-  <!-- Main -->
+  <!-- Gallery -->
   <string name="action_filter">Filter</string>
   <string name="action_sort_by_most_popular">Popular</string>
   <string name="action_sort_by_top_rated">Rated</string>
+  <string name="gallery_retry_button_text">Retry</string>
+  <string name="gallery_retry_toast_text">Please try again!</string>
+  <string name="gallery_empty_state_not_connection_text">Not Internet connection!</string>
+  <string name="gallery_empty_state_generic_error_text">Oops, something went wrong!</string>
+  <string name="gallery_movie_poster_content_description">Movie poster</string>
+
+  <!-- MovieDetails -->
+  <string name="movie_details_activity_title">Movie Details</string>
+  <string name="movie_details_poster_content_description">Movie poster</string>
+
+  movie_detail_poster
 
 </resources>
