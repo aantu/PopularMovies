@@ -16,6 +16,16 @@ App to allow users to discover the most popular movies playing.
   + A plot synopsis
   + User rating
   + Release date
+  
+## API Key
+
+The app retrieves data from [The Movie DB API](https://www.themoviedb.org/documentation/api).
+ 
+To build the project, please add you own API Key into [gradle.properties](gradle.properties):
+
+```gradle
+THE_MOVIE_DB_API_KEY = "your api key here"
+```
 
 ## License
 
