@@ -16,50 +16,20 @@
 
 package com.arthurantunes.popularmovies.api;
 
-import com.arthurantunes.popularmovies.model.Movie;
+import com.arthurantunes.popularmovies.model.MovieTrailer;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class ApiResponse {
+public class MovieTrailersApiResponse {
 
-  @SerializedName("page")
-  private Integer page;
-  @SerializedName("total_results")
-  private Integer totalResults;
-  @SerializedName("total_pages")
-  private Integer totalPages;
   @SerializedName("results")
-  private List<Movie> results;
+  private List<MovieTrailer> results;
 
-  public Integer getPage() {
-    return page;
-  }
-
-  public void setPage(Integer page) {
-    this.page = page;
-  }
-
-  public Integer getTotalResults() {
-    return totalResults;
-  }
-
-  public void setTotalResults(Integer totalResults) {
-    this.totalResults = totalResults;
-  }
-
-  public Integer getTotalPages() {
-    return totalPages;
-  }
-
-  public void setTotalPages(Integer totalPages) {
-    this.totalPages = totalPages;
-  }
-
-  public List<Movie> getResults() {
+  public List<MovieTrailer> getResults() {
     return results;
   }
 
-  public void setResults(List<Movie> results) {
+  public void setResults(List<MovieTrailer> results) {
     this.results = results;
   }
 }

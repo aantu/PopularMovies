@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-package com.arthurantunes.popularmovies.main;
+package com.arthurantunes.popularmovies.details;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-class GalleryItemDecoration extends RecyclerView.ItemDecoration {
+class TrailersGalleryItemDecoration extends RecyclerView.ItemDecoration {
 
   private final int spanCount;
   private final int spacing;
-  private final boolean includeEdge;
 
-  GalleryItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-    this.spanCount = spanCount;
+  TrailersGalleryItemDecoration(int spacing) {
+    this.spanCount = 1;
     this.spacing = spacing;
-    this.includeEdge = includeEdge;
   }
 
   @Override
@@ -37,20 +35,7 @@ class GalleryItemDecoration extends RecyclerView.ItemDecoration {
     int position = parent.getChildAdapterPosition(view);
     int column = position % spanCount;
 
-    if (includeEdge) {
-      outRect.left = spacing - column * spacing / spanCount;
-      outRect.right = (column + 1) * spacing / spanCount;
-
-      if (position < spanCount) {
-        outRect.top = spacing;
-      }
-      outRect.bottom = spacing;
-    } else {
-      outRect.left = column * spacing / spanCount;
-      outRect.right = spacing - (column + 1) * spacing / spanCount;
-      if (position >= spanCount) {
-        outRect.top = spacing;
-      }
-    }
+    outRect.left = spacing - column * spacing / spanCount;
+    outRect.right = (column + 1) * spacing / spanCount;
   }
 }

@@ -14,73 +14,84 @@
  * limitations under the License.
  */
 
-package com.arthurantunes.popularmovies.main;
+package com.arthurantunes.popularmovies.details;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.arthurantunes.popularmovies.R;
 import com.arthurantunes.popularmovies.api.ApiClient;
 import com.arthurantunes.popularmovies.model.Movie;
+import com.arthurantunes.popularmovies.model.MovieTrailer;
 import com.bumptech.glide.Glide;
 import java.util.List;
 
-class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
+class TrailersAdapter
+    extends RecyclerView.Adapter<TrailersAdapter.GalleryViewHolder> {
 
-  private static final String TAG = GalleryAdapter.class.getSimpleName();
+  private final TrailersGalleryItemClickListener clickListener;
+  private final Movie movie;
+  private final List<MovieTrailer> movieTrailers;
 
-  private final GalleryItemClickListener clickListener;
-  private final List<Movie> movies;
-
-  GalleryAdapter(GalleryItemClickListener clickListener, List<Movie> movies) {
+  TrailersAdapter(TrailersGalleryItemClickListener clickListener, Movie movie) {
     this.clickListener = clickListener;
-    this.movies = movies;
+    this.movie = movie;
+    this.movieTrailers = movie.getTrailers();
   }
 
   @Override
-  public GalleryAdapter.GalleryViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+  public TrailersAdapter.GalleryViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-    View view = inflater.inflate(R.layout.gallery_item, viewGroup, false);
+    View view = inflater.inflate(R.layout.trailers_gallery_item, viewGroup, false);
     return new GalleryViewHolder(view);
   }
 
   @Override
-  public void onBindViewHolder(GalleryAdapter.GalleryViewHolder holder, int position) {
+  public void onBindViewHolder(TrailersAdapter.GalleryViewHolder holder, int position) {
     holder.bind(position);
   }
 
   @Override
   public int getItemCount() {
-    return movies.size();
+    return movieTrailers.size();
   }
 
-  interface GalleryItemClickListener {
-    void onGalleryItemClick(int clickedItemIndex);
+  interface TrailersGalleryItemClickListener {
+    void onTrailerItemClick(int clickedItemIndex);
   }
 
   class GalleryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    final ImageView moviePoster;
+    @BindView(R.id.trailer_gallery_item_image_view) ImageView movieTrailerPoster;
+    @BindView(R.id.trailer_gallery_item_text_view) TextView movieTrailerTitle;
 
     GalleryViewHolder(View itemView) {
       super(itemView);
-      moviePoster = (ImageView) itemView.findViewById(R.id.movie_gallery_item_image_view);
+      ButterKnife.bind(this, itemView);
       itemView.setOnClickListener(this);
     }
 
     void bind(int listIndex) {
+      String trailerTitle = itemView.getResources()
+          .getString(R.string.movie_details_trailer_text, listIndex);
+
+      movieTrailerTitle.setText(trailerTitle);
+
       String posterPath = ApiClient.POSTER_IMAGE_BASE_URL
-          + ApiClient.POSTER_IMAGE_SIZE + movies.get(listIndex).getPosterPath();
+          + ApiClient.POSTER_IMAGE_SIZE + movie.getBackdropPath();
 
       Glide.with(itemView.getContext())
           .load(posterPath)
-          .into(moviePoster);
+          .into(movieTrailerPoster);
     }
 
     @Override public void onClick(View v) {
       int clickedPosition = getAdapterPosition();
-      clickListener.onGalleryItemClick(clickedPosition);
+      clickListener.onTrailerItemClick(clickedPosition);
     }
   }
 }

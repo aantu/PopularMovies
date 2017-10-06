@@ -17,10 +17,11 @@
 <resources>
   <string name="app_name">Popular Movies</string>
 
-  <!-- Gallery -->
+  <!-- Main -->
   <string name="action_filter">Filter</string>
   <string name="action_sort_by_most_popular">Popular</string>
   <string name="action_sort_by_top_rated">Rated</string>
+  <string name="action_sort_by_favorites">Favorites</string>
   <string name="gallery_retry_button_text">Retry</string>
   <string name="gallery_retry_toast_text">Please try again!</string>
   <string name="gallery_empty_state_not_connection_text">Not Internet connection!</string>
@@ -30,7 +31,13 @@
   <!-- MovieDetails -->
   <string name="movie_details_activity_title">Movie Details</string>
   <string name="movie_details_poster_content_description">Movie poster</string>
-
-  movie_detail_poster
-
+  <string name="movie_details_overview_header_text">Overview</string>
+  <string name="movie_details_trailers_header_text">Trailers</string>
+  <string name="movie_details_trailer_text">Trailer %1$d</string>
+  <string name="movie_details_play_trailer_video_description">play trailer video</string>
+  <string name="movie_details_reviews_header_text">Reviews</string>
+  <string name="movie_details_trailers_empty_state_message">¡Trailers not available!</string>
+  <string name="movie_details_reviews_empty_state_message">¡Reviews not available!</string>
+  <string name="movie_details_movie_deleted_from_favorites_message">Delete from Favorites</string>
+  <string name="movie_details_movie_saved_into_favorites_message">Saved into Favorites</string>
 </resources>
