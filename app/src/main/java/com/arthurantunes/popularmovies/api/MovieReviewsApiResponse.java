@@ -16,24 +16,30 @@
 
 package com.arthurantunes.popularmovies.api;
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import com.arthurantunes.popularmovies.model.MovieReview;
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
-public interface ApiService {
-  @GET("movie/popular")
-  Call<MoviesApiResponse> getPopularMovies(@Query("api_key") String apiKey);
+public class MovieReviewsApiResponse {
 
-  @GET("movie/top_rated")
-  Call<MoviesApiResponse> getTopRatedMovies(@Query("api_key") String apiKey);
+  @SerializedName("page")
+  private int pagination;
+  @SerializedName("results")
+  private List<MovieReview> results;
 
-  @GET("movie/{id}/videos")
-  Call<MovieTrailersApiResponse> getMovieTrailers(@Path("id") int movieId, @Query("api_key") String apiKey);
+  public int getPagination() {
+    return pagination;
+  }
 
-  @GET("movie/{id}/reviews")
-  Call<MovieReviewsApiResponse> getMovieReviews(@Path("id") int movieId, @Query("api_key") String apiKey);
+  public void setPagination(int pagination) {
+    this.pagination = pagination;
+  }
+
+  public List<MovieReview> getResults() {
+    return results;
+  }
+
+  public void setResults(List<MovieReview> results) {
+    this.results = results;
+  }
 }
-
-
-

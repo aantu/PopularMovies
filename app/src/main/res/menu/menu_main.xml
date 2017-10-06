@@ -34,6 +34,10 @@
         <item
             android:id="@+id/action_sort_by_top_rated"
             android:title="@string/action_sort_by_top_rated" />
+        <item
+            android:id="@+id/action_sort_by_favorites"
+            android:title="@string/action_sort_by_favorites"
+            android:visible="true" />
       </group>
     </menu>
   </item>

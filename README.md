@@ -11,11 +11,31 @@ App to allow users to discover the most popular movies playing.
   + By most popular 
   + By highest-rated
 + Transition to a details screen with additional information:
-  + Original title
-  + Movie poster image thumbnail
-  + A plot synopsis
-  + User rating
-  + Release date
+  + Movie title
+  + Movie poster
+  + Movie synopsis
+  + Movie user rating
+  + Movie Release date
+  
+  
+### Stage 2
+
++ Grid arrangement of movie posters
++ Sort movies order via a setting:
+  + By most popular 
+  + By highest-rated
+  + By favorites
++ Transition to a details screen with additional information:
+  + Movie title
+  + Movie poster
+  + Movie synopsis
+  + Movie user rating
+  + Movie Release date
+  + Movie trailers
+  + Movie reviews
++ View and play movie trailers (Youtube app or a web browser)
++ Mark a movie as a favorite
+
   
 ## API Key
 

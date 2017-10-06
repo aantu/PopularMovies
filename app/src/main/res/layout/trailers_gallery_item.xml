@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Arthur Antunes.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="90dp"
+    android:layout_height="120dp"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    app:cardElevation="@dimen/cardview_default_elevation">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+      <ImageView
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/trailer_gallery_item_image_view"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:adjustViewBounds="true"
+          android:background="@color/primary"
+          android:contentDescription="@string/gallery_movie_poster_content_description"
+          android:scaleType="fitXY"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintTop_toTopOf="parent"/>
+
+      <ImageView
+          android:id="@+id/trailer_gallery_item_play_video_image_view"
+          android:contentDescription="@string/movie_details_play_trailer_video_description"
+          android:layout_width="51dp"
+          android:layout_height="78dp"
+          android:layout_marginBottom="8dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:layout_marginTop="8dp"
+          android:alpha="0.9"
+          android:scaleType="fitCenter"
+          android:tint="@color/icons"
+          app:layout_constraintBottom_toBottomOf="@+id/trailer_gallery_item_image_view"
+          app:layout_constraintLeft_toLeftOf="@+id/trailer_gallery_item_image_view"
+          app:layout_constraintRight_toRightOf="@+id/trailer_gallery_item_image_view"
+          app:layout_constraintTop_toTopOf="@+id/trailer_gallery_item_image_view"
+          app:srcCompat="@drawable/ic_play_circle_filled_24dp"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/trailer_gallery_item_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_dark"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/primary_text"
+        tools:text="Trailer 1"/>
+  </LinearLayout>
+</android.support.v7.widget.CardView>
