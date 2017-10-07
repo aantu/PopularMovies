@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity
   public static final String INTENT_EXTRA_MOVIE = "MOVIE_FROM_API";
   private static final int MOVIE_FROM_DB_REQUEST_CODE = 100;
   private static final int FAVORITE_MOVIES_LOADER_ID = 0;
+  private static final String ON_SAVE_INSTANCE__STATE_KEY = "onSaveInstanceState";
 
   @BindView(R.id.main_image_view_empty_state) ImageView imageViewEmptyState;
   @BindView(R.id.main_text_view_empty_state) TextView textViewEmptyState;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity
   private Cursor cursorFromDatabase;
   private Boolean menuVisibility;
   private Toast toast;
+  private String actualState;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +83,31 @@ public class MainActivity extends AppCompatActivity
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
 
-    dataBaseMoviesAdapter = new DataBaseMoviesAdapter(this);
     galleryRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     galleryRecyclerView.addItemDecoration(new GalleryItemDecoration(2, 20, true));
     galleryRecyclerView.setHasFixedSize(true);
 
     apiService = ApiClient.getClient().create(ApiService.class);
 
-    requestPopularMoviesFromApi();
+    if (savedInstanceState == null) {
+      requestPopularMoviesFromApi();
+    }
+    else {
+      if (savedInstanceState.containsKey(ON_SAVE_INSTANCE__STATE_KEY)) {
+        String actualState = savedInstanceState.getString(ON_SAVE_INSTANCE__STATE_KEY);
+        if (actualState.equals(getString(R.string.action_sort_by_most_popular))) {
+          this.actualState = actualState;
+          requestPopularMoviesFromApi();
+        } else if (actualState.equals(getString(R.string.action_sort_by_top_rated))) {
+          this.actualState = actualState;
+          requestTopRatedMoviesFromApi();
+        } else if (actualState.equals(getString(R.string.action_sort_by_favorites))) {
+          this.actualState = actualState;
+          requestFavoriteMoviesFromDataBase();
+        }
+        invalidateOptionsMenu();
+      }
+    }
   }
 
   @Override
@@ -110,6 +129,7 @@ public class MainActivity extends AppCompatActivity
             if (response.body().getResults() != null && !response.body().getResults().isEmpty()) {
               movies = response.body().getResults();
               setMoviesToApiMoviesAdapter(movies);
+              actualState = getString(R.string.action_sort_by_most_popular);
               hideLoading();
               showGallery();
               requestFavoriteMoviesFromDataBase();
@@ -155,6 +175,7 @@ public class MainActivity extends AppCompatActivity
             if (response.body().getResults() != null && !response.body().getResults().isEmpty()) {
               movies = response.body().getResults();
               setMoviesToApiMoviesAdapter(movies);
+              actualState = getString(R.string.action_sort_by_top_rated);
               hideLoading();
               showGallery();
               requestFavoriteMoviesFromDataBase();
@@ -203,7 +224,14 @@ public class MainActivity extends AppCompatActivity
   }
 
   private void setMoviesToDataBaseAdapter() {
-    galleryRecyclerView.setAdapter(dataBaseMoviesAdapter);
+    dataBaseMoviesAdapter = new DataBaseMoviesAdapter(this);
+    dataBaseMoviesAdapter.swapCursor(cursorFromDatabase);
+    if (actualState != null && actualState.equals(getString(R.string.action_sort_by_favorites))) {
+      hideEmptyState();
+      showGallery();
+      galleryRecyclerView.setAdapter(dataBaseMoviesAdapter);
+      actualState = getString(R.string.action_sort_by_favorites);
+    }
   }
 
   private boolean isInternetConnected() {
@@ -281,9 +309,10 @@ public class MainActivity extends AppCompatActivity
             return true;
           }
         }
-      } finally {
-        cursorFromDatabase.close();
+      } catch (Exception e) {
+        e.printStackTrace();
       }
+      cursorFromDatabase.close();
     }
     return false;
   }
@@ -330,7 +359,19 @@ public class MainActivity extends AppCompatActivity
   @Override
   public boolean onPrepareOptionsMenu(Menu menu) {
     super.onPrepareOptionsMenu(menu);
-    menu.findItem(R.id.action_filter).setVisible(menuVisibility);
+    if (actualState != null && !actualState.isEmpty()) {
+      if (actualState.equals(menu.findItem(R.id.action_sort_by_most_popular).getTitle())) {
+        menu.findItem(R.id.action_sort_by_most_popular).setChecked(true);
+      } else if (actualState.equals(menu.findItem(R.id.action_sort_by_top_rated).getTitle())) {
+        menu.findItem(R.id.action_sort_by_top_rated).setChecked(true);
+      } else if (actualState.equals(menu.findItem(R.id.action_sort_by_favorites).getTitle())) {
+        menu.findItem(R.id.action_sort_by_favorites).setChecked(true);
+      }
+    }
+
+    if (menuVisibility != null) {
+      menu.findItem(R.id.action_filter).setVisible(menuVisibility);
+    }
     return super.onPrepareOptionsMenu(menu);
   }
 
@@ -352,6 +393,7 @@ public class MainActivity extends AppCompatActivity
       case R.id.action_sort_by_favorites:
         if (!item.isChecked()) {
           item.setChecked(true);
+          actualState = getString(R.string.action_sort_by_favorites);
           setMoviesToDataBaseAdapter();
         }
         return true;
@@ -412,7 +454,7 @@ public class MainActivity extends AppCompatActivity
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     cursorFromDatabase = data;
-    dataBaseMoviesAdapter.swapCursor(cursorFromDatabase);
+    setMoviesToDataBaseAdapter();
   }
 
   @Override
@@ -436,6 +478,13 @@ public class MainActivity extends AppCompatActivity
       requestPopularMoviesFromApi();
     } else {
       showToast(getString(R.string.gallery_retry_toast_text));
+    }
+  }
+
+  @Override protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    if (actualState != null && !actualState.isEmpty()) {
+      outState.putString(ON_SAVE_INSTANCE__STATE_KEY, actualState);
     }
   }
 }
